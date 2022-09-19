@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
+import CustomText from "../components/CustomText";
 
 const CreateNote = () => {
   return (
     <View style={styles.container}>
-      <Text>CreateNote</Text>
+      <CustomText>CreateNote</CustomText>
     </View>
   );
 };
