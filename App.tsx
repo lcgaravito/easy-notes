@@ -1,20 +1,41 @@
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import CreateNote from "./screens/CreateNote";
 import Notes from "./screens/Notes";
-
-enum Screen {
-  NOTES,
-  CREATE_NOTE,
-}
+import colors from "./constants/colors";
+import { Note, Screen } from "./types";
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>(Screen.NOTES);
+  const [notes, setNotes] = useState<Note[]>([
+    {
+      id: 1,
+      title: "This is a note",
+      content: "lorem ipsum dolor sit amet, consectetur",
+    },
+    {
+      id: 2,
+      title: "This is a note",
+      content: "lorem ipsum dolor sit amet, consectetur",
+    },
+    {
+      id: 3,
+      title: "This is a note",
+      content: "lorem ipsum dolor sit amet, consectetur",
+    },
+    {
+      id: 4,
+      title: "This is a note",
+      content: "lorem ipsum dolor sit amet, consectetur",
+    },
+  ]);
   const [loaded] = useFonts({
     Poppins: require("./assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
+    Courgette: require("./assets/fonts/Courgette-Regular.ttf"),
+    Maitree: require("./assets/fonts/Maitree-Regular.ttf"),
   });
 
   if (!loaded) {
@@ -22,17 +43,21 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      {screen === Screen.NOTES ? <Notes /> : <CreateNote />}
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      {screen === Screen.NOTES ? (
+        <Notes notes={notes} setScreen={setScreen} />
+      ) : (
+        <CreateNote setScreen={setScreen} />
+      )}
+      <StatusBar style="light" />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colors.gray,
     alignItems: "center",
     justifyContent: "center",
   },
