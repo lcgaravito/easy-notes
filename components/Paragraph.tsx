@@ -14,7 +14,7 @@ export default Paragraph;
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: "Maitree",
     color: colors.white,
   },

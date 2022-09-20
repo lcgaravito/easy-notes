@@ -14,7 +14,7 @@ export default Title;
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 16,
+    fontSize: 24,
     fontFamily: "Poppins",
     color: colors.white,
   },
