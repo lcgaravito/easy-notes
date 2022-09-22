@@ -50,12 +50,12 @@ const CreateNote = ({ setScreen, addNoteFunction }: CreateNoteProps) => {
             />
             <View style={styles.buttonContainer}>
               <Button
-                title="Volver"
+                title="Go back"
                 variant="secondary"
                 onPress={() => setScreen(Screen.NOTES)}
               />
               <Button
-                title="Crear Nota"
+                title="Create Note"
                 variant="primary"
                 onPress={() => handlerAddNote()}
               />

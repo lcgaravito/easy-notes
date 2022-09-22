@@ -13,7 +13,7 @@ const Notes = ({ notes, setScreen }: NotesProps) => {
     <View style={styles.screen}>
       <Title style={{ fontSize: 40 }}>Notes...</Title>
       <FlatList
-        data={notes.reverse()}
+        data={notes.sort((a, b) => b.id - a.id)}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Card style={{ marginHorizontal: 0 }}>
@@ -30,7 +30,7 @@ const Notes = ({ notes, setScreen }: NotesProps) => {
         }}
       >
         <Button
-          title="Crear Nota"
+          title="Create Note"
           variant="primary"
           onPress={() => setScreen(Screen.CREATE_NOTE)}
         />
