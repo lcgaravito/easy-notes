@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
-import { useState } from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { useEffect, useState } from "react";
+import { Dimensions, SafeAreaView, StyleSheet } from "react-native";
 import CreateNote from "./screens/CreateNote";
 import Notes from "./screens/Notes";
 import colors from "./constants/colors";
@@ -12,23 +12,8 @@ export default function App() {
   const [notes, setNotes] = useState<Note[]>([
     {
       id: 1,
-      title: "This is a note",
-      content: "lorem ipsum dolor sit amet, consectetur",
-    },
-    {
-      id: 2,
-      title: "This is a note",
-      content: "lorem ipsum dolor sit amet, consectetur",
-    },
-    {
-      id: 3,
-      title: "This is a note",
-      content: "lorem ipsum dolor sit amet, consectetur",
-    },
-    {
-      id: 4,
-      title: "This is a note",
-      content: "lorem ipsum dolor sit amet, consectetur",
+      title: "Create your first note",
+      content: 'Use the "Create Note" button to go to the Create Note screen.',
     },
   ]);
   const [loaded] = useFonts({
@@ -37,6 +22,22 @@ export default function App() {
     Courgette: require("./assets/fonts/Courgette-Regular.ttf"),
     Maitree: require("./assets/fonts/Maitree-Regular.ttf"),
   });
+  const [isPortrait, setIsPortrait] = useState<boolean>(true);
+
+  const onPortrait = () => {
+    const dim = Dimensions.get("screen");
+    return dim.height >= dim.width;
+  };
+  const statePortrait = () => {
+    setIsPortrait(onPortrait());
+  };
+  useEffect(() => {
+    const suscription = Dimensions.addEventListener("change", statePortrait);
+
+    return () => {
+      suscription.remove();
+    };
+  }, []);
 
   const addNoteFunction = (title: string, content: string) => {
     setNotes((prevNotes) => [...prevNotes, { id: Date.now(), title, content }]);
@@ -49,9 +50,13 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       {screen === Screen.NOTES ? (
-        <Notes notes={notes} setScreen={setScreen} />
+        <Notes isPortrait={isPortrait} notes={notes} setScreen={setScreen} />
       ) : (
-        <CreateNote setScreen={setScreen} addNoteFunction={addNoteFunction} />
+        <CreateNote
+          isPortrait={isPortrait}
+          setScreen={setScreen}
+          addNoteFunction={addNoteFunction}
+        />
       )}
       <StatusBar style="light" />
     </SafeAreaView>

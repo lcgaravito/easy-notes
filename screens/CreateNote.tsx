@@ -11,12 +11,18 @@ import {
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { Button, Input, Title } from "../components";
 import { Screen } from "../types";
+import colors from "../constants/colors";
 
 type CreateNoteProps = {
+  isPortrait: boolean;
   setScreen: Dispatch<SetStateAction<Screen>>;
   addNoteFunction: (title: string, content: string) => void;
 };
-const CreateNote = ({ setScreen, addNoteFunction }: CreateNoteProps) => {
+const CreateNote = ({
+  isPortrait,
+  setScreen,
+  addNoteFunction,
+}: CreateNoteProps) => {
   const [noteTitle, setNoteTitle] = useState<string>("");
   const [noteContent, setNoteContent] = useState<string>("");
   const handlerAddNote = () => {
@@ -25,6 +31,7 @@ const CreateNote = ({ setScreen, addNoteFunction }: CreateNoteProps) => {
       setScreen(Screen.NOTES);
     }
   };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -33,20 +40,27 @@ const CreateNote = ({ setScreen, addNoteFunction }: CreateNoteProps) => {
       <ScrollView>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.screen}>
-            <Title style={{ fontSize: 40 }}>Create a Note</Title>
+            <Title style={{ fontSize: 40 }}>Create a Note...</Title>
             <Input
               style={styles.noteTitle}
               value={noteTitle}
               onChangeText={setNoteTitle}
+              placeholder="Note Title"
+              placeholderTextColor={colors.gray}
             />
             <Input
               style={[
                 styles.noteContent,
-                { height: Dimensions.get("window").height / 3 },
+                {
+                  height:
+                    Dimensions.get("window").height / (isPortrait ? 3 : 4),
+                },
               ]}
               multiline
               value={noteContent}
               onChangeText={setNoteContent}
+              placeholder="Note Content"
+              placeholderTextColor={colors.gray}
             />
             <View style={styles.buttonContainer}>
               <Button

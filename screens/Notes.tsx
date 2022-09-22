@@ -4,11 +4,12 @@ import { Button, Card, Paragraph, Subtitle, Title } from "../components";
 import { Note, Screen } from "../types";
 
 type NotesProps = {
+  isPortrait: boolean;
   notes: Note[];
   setScreen: Dispatch<SetStateAction<Screen>>;
 };
 
-const Notes = ({ notes, setScreen }: NotesProps) => {
+const Notes = ({ isPortrait, notes, setScreen }: NotesProps) => {
   return (
     <View style={styles.screen}>
       <Title style={{ fontSize: 40 }}>Notes...</Title>
@@ -23,11 +24,11 @@ const Notes = ({ notes, setScreen }: NotesProps) => {
         )}
       />
       <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-          width: "100%",
-        }}
+        style={
+          isPortrait
+            ? styles.buttonContainerPortrait
+            : styles.buttonContainerLandscape
+        }
       >
         <Button
           title="Create Note"
@@ -46,5 +47,15 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
+  },
+  buttonContainerPortrait: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: "100%",
+    marginTop: 15,
+  },
+  buttonContainerLandscape: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
 });

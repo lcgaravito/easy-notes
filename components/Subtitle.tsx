@@ -14,7 +14,7 @@ export default Subtitle;
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 22,
+    fontSize: 26,
     fontFamily: "Courgette",
     color: colors.white,
   },
