@@ -10,10 +10,10 @@ type NotesProps = {
 
 const Notes = ({ notes, setScreen }: NotesProps) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
       <Title style={{ fontSize: 40 }}>Notes...</Title>
       <FlatList
-        data={notes}
+        data={notes.reverse()}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Card style={{ marginHorizontal: 0 }}>
@@ -42,7 +42,7 @@ const Notes = ({ notes, setScreen }: NotesProps) => {
 export default Notes;
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     padding: 20,
     justifyContent: "center",

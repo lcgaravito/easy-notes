@@ -38,6 +38,10 @@ export default function App() {
     Maitree: require("./assets/fonts/Maitree-Regular.ttf"),
   });
 
+  const addNoteFunction = (title: string, content: string) => {
+    setNotes((prevNotes) => [...prevNotes, { id: Date.now(), title, content }]);
+  };
+
   if (!loaded) {
     return null;
   }
@@ -47,7 +51,7 @@ export default function App() {
       {screen === Screen.NOTES ? (
         <Notes notes={notes} setScreen={setScreen} />
       ) : (
-        <CreateNote setScreen={setScreen} />
+        <CreateNote setScreen={setScreen} addNoteFunction={addNoteFunction} />
       )}
       <StatusBar style="light" />
     </SafeAreaView>
