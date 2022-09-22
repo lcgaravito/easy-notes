@@ -4,4 +4,5 @@ export default {
   white: "#ffffff",
   gray: "#202028",
   lightGrey: "#46464e",
+  placeholderColor: "#8c8c91",
 };

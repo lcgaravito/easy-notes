@@ -45,8 +45,8 @@ const CreateNote = ({
               style={styles.noteTitle}
               value={noteTitle}
               onChangeText={setNoteTitle}
-              placeholder="Note Title"
-              placeholderTextColor={colors.gray}
+              placeholder="Note Title..."
+              placeholderTextColor={colors.placeholderColor}
             />
             <Input
               style={[
@@ -59,8 +59,8 @@ const CreateNote = ({
               multiline
               value={noteContent}
               onChangeText={setNoteContent}
-              placeholder="Note Content"
-              placeholderTextColor={colors.gray}
+              placeholder="Note Content..."
+              placeholderTextColor={colors.placeholderColor}
             />
             <View style={styles.buttonContainer}>
               <Button
